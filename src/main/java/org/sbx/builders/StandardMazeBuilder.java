@@ -1,8 +1,11 @@
 package org.sbx.builders;
 
 import org.sbx.factories.SiteFactory;
+import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
 import org.sbx.objects.Room;
+
+import java.util.HashMap;
 
 /**
  * Created by aloginov on 27.09.16.
@@ -17,11 +20,8 @@ public class StandardMazeBuilder extends MazeBuilder {
         siteFactory = new SiteFactory();
     }
 
-    public void buildRoom(int roomId){
-        siteFactory.makeRoom(roomId);
-    }
-
-    public void buildDoor(Room roomFrom, Room roomTo){
-        siteFactory.makeDoor(roomFrom, roomTo);
+    public void addRoom(HashMap<Direction, String> sites){
+        RoomDirector roomDirector = new RoomDirector();
+        currentMaze.addRoom(roomDirector.buildRoom(sites));
     }
 }

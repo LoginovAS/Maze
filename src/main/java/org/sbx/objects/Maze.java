@@ -1,6 +1,6 @@
 package org.sbx.objects;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,10 +8,10 @@ import java.util.List;
  */
 public class Maze {
 
-    private HashSet<Room> rooms;
+    private List<Room> rooms;
 
     public Maze(){
-        // TODO
+        rooms = new ArrayList<Room>();
     }
 
     public void addRoom(Room room){
@@ -19,6 +19,6 @@ public class Maze {
     }
 
     public Room getRoomById(int roomId){
-        return null;
+        return rooms.get(roomId);
     }
 }

@@ -1,18 +1,14 @@
 package org.sbx.objects;
 
-import org.sbx.interfaces.Site;
+import org.sbx.abstracts.Site;
 
 /**
  * Created by aloginov on 27.09.16.
  */
-public class Door implements Site {
+public class Door extends Site {
 
-    private Room room1;
-    private Room room2;
+    public Door(){
 
-    public Door(Room room1, Room room2){
-        this.room1 = room1;
-        this.room2 = room2;
     }
 
 }
