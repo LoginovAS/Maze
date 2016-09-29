@@ -9,6 +9,7 @@ import org.sbx.objects.Wall;
  */
 public class SiteFactory {
 
+<<<<<<< 8ab82bb5a8befd9ee0180d3fb94d0d3e35874816
     public Site getSite(String siteName){
         if (siteName.equals("room"))
             return new Wall();
@@ -18,4 +19,18 @@ public class SiteFactory {
         return null;
     }
 
+=======
+    public Site createSite(Class<Site> clazz){
+        Site inst = null;
+        try{
+            inst = clazz.newInstance();
+        } catch (InstantiationException ex){
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex){
+            ex.printStackTrace();
+        }
+
+        return inst;
+    }
+>>>>>>> [27/09/2016]
 }
