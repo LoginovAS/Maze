@@ -1,9 +1,4 @@
 target/
 logs/
-<<<<<<< 8ab82bb5a8befd9ee0180d3fb94d0d3e35874816
 .idea/
 *.iml
-=======
-*.iml
-.idea/
->>>>>>> [27/09/2016]

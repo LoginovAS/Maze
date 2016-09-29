@@ -9,17 +9,6 @@ import org.sbx.objects.Wall;
  */
 public class SiteFactory {
 
-<<<<<<< 8ab82bb5a8befd9ee0180d3fb94d0d3e35874816
-    public Site getSite(String siteName){
-        if (siteName.equals("room"))
-            return new Wall();
-        else if (siteName.equals("door"))
-            return new Door();
-
-        return null;
-    }
-
-=======
     public Site createSite(Class<Site> clazz){
         Site inst = null;
         try{
@@ -32,5 +21,4 @@ public class SiteFactory {
 
         return inst;
     }
->>>>>>> [27/09/2016]
 }
