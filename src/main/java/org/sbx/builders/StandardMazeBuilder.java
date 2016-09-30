@@ -21,7 +21,9 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
     }
 
     public void addRoom(HashMap<Direction, String> sites){
-        RoomDirector roomDirector = new RoomDirector(sites);
+        RoomDirector roomDirector = new RoomDirector();
+        roomDirector.setBuilder();
+        roomDirector.desc(sites);
         roomDirector.construct();
         currentMaze.addRoom(roomDirector.build());
     }

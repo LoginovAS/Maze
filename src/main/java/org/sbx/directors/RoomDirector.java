@@ -16,16 +16,17 @@ public class RoomDirector implements Director {
     private StandardRoomBuilder roomBuilder;
     private HashMap<Direction, String> sites;
 
-    public RoomDirector(HashMap<Direction, String> sites){
-        this.sites = sites;
-    }
+    public RoomDirector(){ }
 
     public void setBuilder(){
         this.roomBuilder = new StandardRoomBuilder();
     }
 
-    public void construct(){
+    public void desc(HashMap<Direction, String> sites){
+        this.sites = sites;
+    }
 
+    public void construct(){
         for (Map.Entry<Direction, String> site: sites.entrySet()){
             try {
                 roomBuilder.addSite(site.getKey(), Class.forName(site.getValue()));
