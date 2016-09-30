@@ -18,8 +18,4 @@ public abstract class MazeBuilder {
     }
 
     public abstract void addRoom(HashMap<Direction, String> sites);
-
-    public Maze build(){
-        return null;
-    }
 }
