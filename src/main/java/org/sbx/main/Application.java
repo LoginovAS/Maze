@@ -13,6 +13,14 @@ import java.util.HashMap;
  */
 public class Application {
     public static void main(String[] args){
+
+        MazeDirector mazeDirector = new MazeDirector();
+        mazeDirector.setBuilder();
+
+        mazeDirector.desc(5);
+        mazeDirector.construct();
+        Maze maze = mazeDirector.build();
+        /*
         HashMap<Direction, String> sites = new HashMap<Direction, String>();
         RandomSiteGenerator siteGenerator = new RandomSiteGenerator();
         MazeDirector mazeDirector = new MazeDirector();
@@ -30,6 +38,7 @@ public class Application {
 
         Maze maze = mazeDirector.build();
         System.out.println(maze.toString());
+        */
     }
 }
 

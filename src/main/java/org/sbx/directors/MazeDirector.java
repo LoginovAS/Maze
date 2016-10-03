@@ -16,6 +16,7 @@ public class MazeDirector implements Director {
 
     private StandardMazeBuilder mazeBuilder;
     private HashMap<Direction, String> sites;
+    private int mazeSize;
 
     public MazeDirector(){ }
 
@@ -23,12 +24,23 @@ public class MazeDirector implements Director {
         this.sites = sites;
     }
 
+    public void desc(int mazeSize){
+        this.mazeSize = mazeSize;
+    }
+
     public void setBuilder(){
         this.mazeBuilder = new StandardMazeBuilder();
     }
 
     public void construct(){
-        mazeBuilder.addRoom(sites);
+        mazeBuilder.setMazeSize(mazeSize);
+        mazeBuilder.buildMazeFrame();
+        mazeBuilder.createDoors();
+        //mazeBuilder.addRoom(sites);
+    }
+
+    public void addDoor(int room1, int room2){
+
     }
 
     public Maze build(){
