@@ -23,4 +23,8 @@ public class Maze implements Buildable{
     public Room getRoomById(int roomId){
         return rooms.get(roomId);
     }
+
+    public String toString(){
+        return "New Maze has been created. It has " + rooms.size() + "rooms.";
+    }
 }
