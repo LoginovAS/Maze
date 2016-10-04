@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.sbx.abstracts.RoomBuilder;
 import org.sbx.abstracts.Site;
+import org.sbx.exceptions.GameplayException;
 import org.sbx.factories.SiteFactory;
 import org.sbx.interfaces.Buildable;
 import org.sbx.interfaces.Builder;
@@ -40,7 +41,12 @@ public class StandardRoomBuilder extends RoomBuilder implements Builder {
     }
 
     public void addSite(Direction direction, Class clazz){
-        room.addSite(direction, siteFactory.createSite(clazz));
+        try {
+            room.addSite(direction, siteFactory.createSite(clazz));
+        } catch (GameplayException ex){
+            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.trace(ex.getStackTrace());
+        }
     }
 
     public Room build(){

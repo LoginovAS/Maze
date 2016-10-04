@@ -1,6 +1,8 @@
 package org.sbx.factories;
 
 import org.sbx.abstracts.Site;
+import org.sbx.exceptions.Errors;
+import org.sbx.exceptions.GameplayException;
 import org.sbx.objects.Door;
 import org.sbx.objects.Wall;
 
@@ -9,7 +11,10 @@ import org.sbx.objects.Wall;
  */
 public class SiteFactory {
 
-    public Site createSite(Class<Site> clazz){
+    public Site createSite(Class<Site> clazz) throws GameplayException{
+
+        Errors error = Errors.CLASS_STRUCTURE_ERROR;
+
         Site inst = null;
         try{
             inst = clazz.newInstance();
@@ -18,6 +23,9 @@ public class SiteFactory {
         } catch (IllegalAccessException ex){
             ex.printStackTrace();
         }
+
+        if (inst == null)
+            throw new GameplayException(error);
 
         return inst;
     }
