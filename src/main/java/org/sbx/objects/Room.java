@@ -3,6 +3,7 @@ package org.sbx.objects;
 import org.sbx.abstracts.Site;
 import org.sbx.interfaces.Buildable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,11 @@ public class Room implements Buildable{
     }
 
     public void addSite(Direction direction, Site site){
+        if (this.sites.containsKey(direction))
+            this.sites.remove(direction);
+
         this.sites.put(direction, site);
+
     }
+
 }

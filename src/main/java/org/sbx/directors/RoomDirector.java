@@ -1,9 +1,12 @@
 package org.sbx.directors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.sbx.builders.StandardRoomBuilder;
 import org.sbx.interfaces.Director;
 import org.sbx.objects.Direction;
 import org.sbx.objects.Room;
+import org.sbx.service.Classes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +16,7 @@ import java.util.Map;
  */
 public class RoomDirector implements Director {
 
+    private static final Logger logger = LogManager.getLogger(RoomDirector.class);
     private StandardRoomBuilder roomBuilder;
     private HashMap<Direction, String> sites;
 
@@ -34,6 +38,20 @@ public class RoomDirector implements Director {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public void setDoor(Room room, Direction direction){
+        roomBuilder = new StandardRoomBuilder(room);
+        try {
+            roomBuilder.addSite(direction, Class.forName(Classes.CLASS_DOOR));
+        } catch (ClassNotFoundException ex){
+            logger.fatal(ex);
+        }
+
+    }
+
+    public void constructRoomFrame(){
+        roomBuilder.constructRoomFrame();
     }
 
     public Room build(){
