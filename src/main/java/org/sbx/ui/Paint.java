@@ -9,13 +9,8 @@ import java.awt.*;
  */
 public class Paint {
     public Paint(Maze maze){
-        MazePanel mazePanel = new MazePanel();
-        MazeWindow mazeWindow = new MazeWindow();
-        mazePanel.setMaze(maze);
+        MazeWindow mazeWindow = new MazeWindow(maze);
         mazeWindow.setSize(500, 500);
-        mazeWindow.setLayout(new BorderLayout());
-        mazeWindow.getContentPane().add(mazePanel);
-        mazePanel.repaint();
         mazeWindow.setVisible(true);
     }
 }

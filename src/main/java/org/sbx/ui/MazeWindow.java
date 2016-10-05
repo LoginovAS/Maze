@@ -13,8 +13,12 @@ import java.awt.event.WindowEvent;
  */
 public class MazeWindow extends JFrame {
 
-    public MazeWindow(){
+    public MazeWindow(Maze maze){
         super("Maze window");
+
+        MazePanel mazePanel = new MazePanel();
+        mazePanel.setMaze(maze);
+        getContentPane().add(mazePanel);
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -25,6 +29,6 @@ public class MazeWindow extends JFrame {
             }
         });
 
-
+        pack();
     }
 }

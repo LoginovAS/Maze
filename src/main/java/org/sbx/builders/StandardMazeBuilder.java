@@ -30,11 +30,11 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
     }
 
     public void setMazeSize(int mazeSize){
-        this.mazeSize = mazeSize;
+        currentMaze.setSize(mazeSize);
     }
 
     public void buildMazeFrame(){
-        for (int i = 0; i < mazeSize * mazeSize; i++) {
+        for (int i = 0; i < currentMaze.getSize() * currentMaze.getSize(); i++) {
             this.addRoomFrame();
             this.unvisitedList.add(i);
         }
@@ -117,11 +117,11 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
     }
 
     private int getX(){
-        return currentRoom / mazeSize;
+        return currentRoom / currentMaze.getSize();
     }
 
     private int getY(){
-        return currentRoom % mazeSize;
+        return currentRoom % currentMaze.getSize();
     }
 
     private ArrayList<Integer> getNeighbours(){

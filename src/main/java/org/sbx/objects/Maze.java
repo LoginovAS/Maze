@@ -27,6 +27,10 @@ public class Maze implements Buildable{
         this.size = size;
     }
 
+    public void setSize(int size){
+        this.size = size;
+    }
+
     public void setCurrentRoom(int roomId){
         this.currentRoom = roomId;
     }
