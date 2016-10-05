@@ -36,11 +36,6 @@ public class MazeDirector implements Director {
         mazeBuilder.setMazeSize(mazeSize);
         mazeBuilder.buildMazeFrame();
         mazeBuilder.createDoors();
-        //mazeBuilder.addRoom(sites);
-    }
-
-    public void addDoor(int room1, int room2){
-
     }
 
     public Maze build(){

@@ -81,13 +81,13 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         Direction direction = null;
         int x = roomId1 - roomId2;
         if (x == -1)
-            return direction = Direction.EAST;
+            return Direction.EAST;
         if (x == 1)
-            return direction = Direction.WEST;
+            return Direction.WEST;
         if (x == -mazeSize)
-            return direction = Direction.SOUTH;
+            return Direction.SOUTH;
         if (x == mazeSize)
-            return direction = Direction.NORTH;
+            return Direction.NORTH;
 
         if (direction == null)
             throw new GameplayException(error);
