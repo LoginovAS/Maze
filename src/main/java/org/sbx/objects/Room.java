@@ -26,4 +26,8 @@ public class Room implements Buildable{
 
     }
 
+    public Map<Direction, Site> getSites(){
+        return sites;
+    }
+
 }

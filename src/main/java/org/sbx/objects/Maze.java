@@ -48,6 +48,10 @@ public class Maze implements Buildable{
         this.rooms.add(roomId, room);
     }
 
+    public int getSize(){
+        return  size;
+    }
+
     public String toString(){
         return "New Maze has been created. It has " + rooms.size() + "rooms.";
     }

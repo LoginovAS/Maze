@@ -5,7 +5,9 @@ import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
 import org.sbx.service.Classes;
 import org.sbx.service.RandomSiteGenerator;
+import org.sbx.ui.Paint;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 /**
@@ -19,7 +21,12 @@ public class Application {
 
         mazeDirector.desc(5);
         mazeDirector.construct();
-        Maze maze = mazeDirector.build();
+        final Maze maze = mazeDirector.build();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Paint(maze);
+            }
+        });
         /*
         HashMap<Direction, String> sites = new HashMap<Direction, String>();
         RandomSiteGenerator siteGenerator = new RandomSiteGenerator();
