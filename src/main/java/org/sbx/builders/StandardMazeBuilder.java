@@ -1,7 +1,11 @@
 package org.sbx.builders;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.sbx.abstracts.MazeBuilder;
 import org.sbx.directors.RoomDirector;
+import org.sbx.exceptions.GameplayException;
+import org.sbx.exceptions.Errors;
 import org.sbx.interfaces.Builder;
 import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
@@ -16,6 +20,7 @@ import java.util.Random;
  */
 public class StandardMazeBuilder extends MazeBuilder implements Builder {
 
+    private static final Logger logger = LogManager.getLogger(StandardMazeBuilder.class);
     private Maze currentMaze;
     private int mazeSize;
 
@@ -71,7 +76,9 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         }
     }
 
-    public Direction getRoomDirection(int roomId1, int roomId2){
+    public Direction getRoomDirection(int roomId1, int roomId2) throws GameplayException {
+        Errors error = Errors.DIRECTION_NEIGHBOURHOOD_ERROR;
+        Direction direction = null;
         int x = roomId1 - roomId2;
         if (x == -1)
             return Direction.EAST;
@@ -82,23 +89,30 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         if (x == mazeSize)
             return Direction.NORTH;
 
-        return  null;
+        if (direction == null)
+            throw new GameplayException(error);
+
+        return direction;
     }
 
     public void createDoor(int roomId1, int roomId2){
-        Direction direction1 = this.getRoomDirection(roomId1, roomId2);
-        Direction direction2 = this.getRoomDirection(roomId2, roomId1);
         RoomDirector roomDirector = new RoomDirector();
         roomDirector.setBuilder();
-        Room room;
-        if (direction1 != null){
-            room = currentMaze.getRoomById(roomId1);
-            roomDirector.setDoor(room, direction1);
-            currentMaze.changeRoom(roomId1, roomDirector.build());
+        try {
+            Direction direction1 = this.getRoomDirection(roomId1, roomId2);
+            Direction direction2 = this.getRoomDirection(roomId2, roomId1);
+            if (direction1 != null){
+                Room room = currentMaze.getRoomById(roomId1);
+                roomDirector.setDoor(room, direction1);
+                currentMaze.changeRoom(roomId1, roomDirector.build());
 
-            room = currentMaze.getRoomById(roomId2);
-            roomDirector.setDoor(room, direction2);
-            currentMaze.changeRoom(roomId2, roomDirector.build());
+                room = currentMaze.getRoomById(roomId2);
+                roomDirector.setDoor(room, direction2);
+                currentMaze.changeRoom(roomId2, roomDirector.build());
+            }
+        } catch (GameplayException ex){
+            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.trace(ex.getStackTrace());
         }
     }
 
