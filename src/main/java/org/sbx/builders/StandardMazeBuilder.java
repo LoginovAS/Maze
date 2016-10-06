@@ -26,15 +26,16 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
 
     public StandardMazeBuilder(){
         super();
-        currentMaze = new Maze();
+        this.currentMaze = new Maze();
     }
 
     public void setMazeSize(int mazeSize){
-        currentMaze.setSize(mazeSize);
+        this.mazeSize = mazeSize;
+        this.currentMaze.setSize(mazeSize);
     }
 
     public void buildMazeFrame(){
-        for (int i = 0; i < currentMaze.getSize() * currentMaze.getSize(); i++) {
+        for (int i = 0; i < Math.pow(mazeSize, 2); i++) {
             this.addRoomFrame();
             this.unvisitedList.add(i);
         }
@@ -63,8 +64,9 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
             neighbours = this.getNeighbours();
             random = new Random(System.currentTimeMillis());
             if (!neighbours.isEmpty()){
+                int r = random.nextInt(100000);
                 this.addRoomToStack(currentRoom);
-                int randomNeighbour = neighbours.get(random.nextInt(neighbours.size()));
+                randomNeighbour = neighbours.get(random.nextInt(neighbours.size()));
                 this.createDoor(currentRoom, randomNeighbour);
                 this.setCurrentRoom(randomNeighbour);
             } else if (!currentRoomsStack.isEmpty()){
@@ -81,13 +83,13 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         Direction direction = null;
         int x = roomId1 - roomId2;
         if (x == -1)
-            return direction = Direction.EAST;
+            return Direction.EAST;
         if (x == 1)
-            return direction = Direction.WEST;
+            return Direction.WEST;
         if (x == -mazeSize)
-            return direction = Direction.SOUTH;
+            return Direction.SOUTH;
         if (x == mazeSize)
-            return direction = Direction.NORTH;
+            return Direction.NORTH;
 
         if (direction == null)
             throw new GameplayException(error);
@@ -101,6 +103,7 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         try {
             Direction direction1 = this.getRoomDirection(roomId1, roomId2);
             Direction direction2 = this.getRoomDirection(roomId2, roomId1);
+
             if (direction1 != null){
                 Room room = currentMaze.getRoomById(roomId1);
                 roomDirector.setDoor(room, direction1);
@@ -117,15 +120,16 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
     }
 
     private int getX(){
-        return currentRoom / currentMaze.getSize();
+        return currentRoom / this.mazeSize;
     }
 
     private int getY(){
-        return currentRoom % currentMaze.getSize();
+        return currentRoom % this.mazeSize;
     }
 
     private ArrayList<Integer> getNeighbours(){
         this.neighbours = new ArrayList<Integer>();
+
         if ((this.getY() - 1 >= 0) && (unvisitedList.contains(currentRoom - 1))){
             neighbours.add(currentRoom - 1);
         }
@@ -138,13 +142,15 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
             neighbours.add(currentRoom - mazeSize);
         }
 
-        if ((this.getX() + 1 < mazeSize) && (unvisitedList.contains(currentRoom + mazeSize))){
+        if ((this.getX() + 1 < currentMaze.getSize()) && (unvisitedList.contains(currentRoom + mazeSize))){
             neighbours.add(currentRoom + mazeSize);
         }
 
         return neighbours;
     }
-
+    public int getRoomId(Room room){
+        return this.currentMaze.getRooms().indexOf(room);
+    }
     public Maze build(){
         return currentMaze;
     }

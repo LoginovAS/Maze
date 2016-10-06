@@ -49,7 +49,7 @@ public class Maze implements Buildable{
     }
 
     public void changeRoom(int roomId, Room room){
-        this.rooms.add(roomId, room);
+        this.rooms.set(roomId, room);
     }
 
     public int getSize(){

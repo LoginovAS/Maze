@@ -3,6 +3,7 @@ package org.sbx.main;
 import org.sbx.directors.MazeDirector;
 import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
+import org.sbx.objects.Room;
 import org.sbx.service.Classes;
 import org.sbx.service.RandomSiteGenerator;
 import org.sbx.ui.Paint;
@@ -19,7 +20,7 @@ public class Application {
         MazeDirector mazeDirector = new MazeDirector();
         mazeDirector.setBuilder();
 
-        mazeDirector.desc(3);
+        mazeDirector.desc(20);
         mazeDirector.construct();
         final Maze maze = mazeDirector.build();
         SwingUtilities.invokeLater(new Runnable() {
@@ -27,25 +28,6 @@ public class Application {
                 new Paint(maze);
             }
         });
-        /*
-        HashMap<Direction, String> sites = new HashMap<Direction, String>();
-        RandomSiteGenerator siteGenerator = new RandomSiteGenerator();
-        MazeDirector mazeDirector = new MazeDirector();
-        mazeDirector.setBuilder();
-        for (int i = 0; i < 10; i++){
-            sites.put(Direction.NORTH, siteGenerator.generate(100));
-            sites.put(Direction.EAST, siteGenerator.generate(100));
-            sites.put(Direction.SOUTH, siteGenerator.generate(100));
-            sites.put(Direction.WEST, siteGenerator.generate(100));
-
-            mazeDirector.desc(sites);
-            mazeDirector.construct();
-            sites = new HashMap<Direction, String>();
-        }
-
-        Maze maze = mazeDirector.build();
-        System.out.println(maze.toString());
-        */
     }
 }
 

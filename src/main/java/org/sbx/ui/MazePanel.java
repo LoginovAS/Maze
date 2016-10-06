@@ -37,13 +37,10 @@ public class MazePanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.blue);
         g2d.setStroke(new BasicStroke(2));
-        System.out.println(maze.getSize());
         Rectangle2D rect = new Rectangle2D.Double(x0, y0, cellSize * maze.getSize(), cellSize * maze.getSize());
-        ArrayList<Line2D> lines = new ArrayList<Line2D>();
         int counter = 0;
         for (Room room: maze.getRooms()){
-            x += cellSize;
-            if (counter % maze.getSize() == 0){
+            if ((counter != 0) && (counter % maze.getSize() == 0)){
                 x = x0;
                 y += cellSize;
             }
@@ -52,31 +49,34 @@ public class MazePanel extends JPanel {
                     case NORTH:
                         if (entry.getValue().toString().contains(Classes.CLASS_WALL)) {
                             Line2D line = new Line2D.Double(x, y, x + cellSize, y);
-                            lines.add(line);
+                            g2d.draw(line);
                         }
+                        break;
                     case EAST:
                         if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
                             Line2D line = new Line2D.Double(x + cellSize, y, x + cellSize, y + cellSize);
-                            lines.add(line);
+                            g2d.draw(line);
                         }
+                        break;
                     case SOUTH:
                             if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
                                 Line2D line = new Line2D.Double(x, y + cellSize, x + cellSize, y + cellSize);
-                                lines.add(line);
+                                g2d.draw(line);
                             }
+                        break;
                     case WEST:
                             if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
                                 Line2D line = new Line2D.Double(x, y, x, y + cellSize);
-                                lines.add(line);
+                                g2d.draw(line);
                             }
+                        break;
                 }
             }
+            x += cellSize;
             counter++;
         }
         g2d.draw(rect);
         g2d.setColor(Color.red);
-        for (Line2D line: lines)
-            g2d.draw(line);
     }
 
     public Dimension getPreferredSize() {
