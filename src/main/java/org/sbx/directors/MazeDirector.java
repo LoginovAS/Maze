@@ -6,6 +6,7 @@ import org.sbx.factories.SiteFactory;
 import org.sbx.interfaces.Director;
 import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
+import org.sbx.objects.Room;
 
 import java.util.HashMap;
 
@@ -36,6 +37,10 @@ public class MazeDirector implements Director {
         mazeBuilder.setMazeSize(mazeSize);
         mazeBuilder.buildMazeFrame();
         mazeBuilder.createDoors();
+    }
+
+    public int getIdByRoom(Room room){
+        return mazeBuilder.getRoomId(room);
     }
 
     public Maze build(){
