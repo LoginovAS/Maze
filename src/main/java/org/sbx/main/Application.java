@@ -20,7 +20,7 @@ public class Application {
         MazeDirector mazeDirector = new MazeDirector();
         mazeDirector.setBuilder();
 
-        mazeDirector.desc(20);
+        mazeDirector.desc(5);
         mazeDirector.construct();
         final Maze maze = mazeDirector.build();
         SwingUtilities.invokeLater(new Runnable() {

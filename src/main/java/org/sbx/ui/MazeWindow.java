@@ -16,8 +16,10 @@ public class MazeWindow extends JFrame {
     public MazeWindow(Maze maze){
         super("Maze window");
 
-        MazePanel mazePanel = new MazePanel();
+        //MazePanel mazePanel = new MazePanel();
+        VisualPanel mazePanel = new VisualPanel();
         mazePanel.setMaze(maze);
+        mazePanel.initPlayer();
         getContentPane().add(mazePanel);
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
