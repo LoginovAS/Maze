@@ -33,7 +33,7 @@ public class VisualPanel extends JPanel {
 
     public void initPlayer(){
         VisualPlayer player = new VisualPlayer();
-        player.setCoords(x0, y0);
+        //player.setCoords(x0, y0);
         player.setDimension(width / 3, height / 3);
         player.init();
         add(player.getPlayer());
@@ -67,8 +67,8 @@ public class VisualPanel extends JPanel {
     }
 
     private void setView(Graphics2D g2d){
+        this.setLayout(new BorderLayout());
         this.g2d.setColor(Color.blue);
         this.g2d.setStroke(new BasicStroke(2));
-        this.setLayout(null);
     }
 }

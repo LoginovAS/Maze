@@ -148,8 +148,10 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
 
         return neighbours;
     }
+
+
     public int getRoomId(Room room){
-        return this.currentMaze.getRooms().indexOf(room);
+        return Maze.getRooms().indexOf(room);
     }
     public Maze build(){
         return currentMaze;

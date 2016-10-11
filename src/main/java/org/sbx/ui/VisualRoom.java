@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by aloginov on 10.10.16.
  */
-public class VisualRoom {
+public class VisualRoom extends AbstractVisual{
 
     private Room room;
     private ArrayList<Line2D> lines = new ArrayList();
@@ -43,27 +43,32 @@ public class VisualRoom {
 
     private void construct(){
         for (Map.Entry<Direction, Site> entry: room.getSites().entrySet()){
+            Site site = null;
             switch (entry.getKey()){
                 case NORTH:
-                    if (entry.getValue().toString().contains(Classes.CLASS_WALL)) {
+                    site = entry.getValue();
+                    if (site.toString().contains(Classes.CLASS_WALL)) {
                         Line2D line = new Line2D.Double(x, y, x + width, y);
                         lines.add(line);
                     }
                     break;
                 case EAST:
-                    if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
+                    site = entry.getValue();
+                    if (site.toString().contains(Classes.CLASS_WALL)){
                         Line2D line = new Line2D.Double(x + width, y, x + width, y + height);
                         lines.add(line);
                     }
                     break;
                 case SOUTH:
-                    if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
+                    site = entry.getValue();
+                    if (site.toString().contains(Classes.CLASS_WALL)){
                         Line2D line = new Line2D.Double(x, y + height, x + width, y + height);
                         lines.add(line);
                     }
                     break;
                 case WEST:
-                    if (entry.getValue().toString().contains(Classes.CLASS_WALL)){
+                    site = entry.getValue();
+                    if (site.toString().contains(Classes.CLASS_WALL)){
                         Line2D line = new Line2D.Double(x, y, x, y + height);
                         lines.add(line);
                     }

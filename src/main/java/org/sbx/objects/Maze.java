@@ -2,6 +2,8 @@ package org.sbx.objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.sbx.exceptions.Errors;
+import org.sbx.exceptions.GameplayException;
 import org.sbx.interfaces.Buildable;
 
 import java.util.ArrayList;
@@ -14,10 +16,10 @@ import java.util.List;
 public class Maze implements Buildable{
 
     private static final Logger logger = LogManager.getLogger(Maze.class);
-    private int size;
-    private List<Room> rooms;
+    private static int size;
+    private static List<Room> rooms;
     private ArrayList<Integer> neighbours = new ArrayList<Integer>();
-    private int currentRoom;
+    private static int currentRoom;
 
     public Maze(){
         rooms = new ArrayList<Room>();
@@ -40,7 +42,7 @@ public class Maze implements Buildable{
         int currentRoomId = rooms.indexOf(room);
     }
 
-    public List<Room> getRooms(){
+    public static List<Room> getRooms(){
         return rooms;
     }
 
@@ -54,6 +56,45 @@ public class Maze implements Buildable{
 
     public int getSize(){
         return  size;
+    }
+
+    public static int getNeighbourId(Direction direction) throws GameplayException{
+
+        logger.error(direction.toString());
+        logger.error(currentRoom);
+        String str = "Size: " + size;
+        logger.error(str);
+        str = "Rooms size: " + rooms.size();
+        logger.error(str);
+        int nId = -1;
+        switch (direction){
+            case NORTH:
+                if (currentRoom >= size)
+                    nId = currentRoom - size;
+                else
+                    throw new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
+                break;
+            case EAST:
+                if ((currentRoom + 1) % size < size - 1)
+                    nId = currentRoom + 1;
+                else
+                    throw  new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
+                break;
+            case SOUTH:
+                if (currentRoom <= rooms.size() - size)
+                    nId = currentRoom + size;
+                else
+                    throw  new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
+                break;
+            case WEST:
+                if (currentRoom % size != 0)
+                    nId = currentRoom - 1;
+                else
+                    throw new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
+                break;
+        }
+        logger.error(nId);
+        return nId;
     }
 
     public String toString(){

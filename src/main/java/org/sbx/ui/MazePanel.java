@@ -21,10 +21,19 @@ import java.util.Map;
 public class MazePanel extends JPanel {
 
     private static final Logger logger = LogManager.getLogger(MazePanel.class);
+    private int cellSize = 20;
     private Maze maze;
 
     public void setMaze(Maze maze){
         this.maze = maze;
+    }
+
+    public void initPlayer(){
+        VisualPlayer player = new VisualPlayer();
+        //player.setCoords(x0, y0);
+        player.setDimension(cellSize / 3, cellSize / 3);
+        player.init();
+        add(player.getPlayer());
     }
 
     protected void paintComponent(Graphics g){
@@ -33,7 +42,6 @@ public class MazePanel extends JPanel {
         int y0 = 5;
         int x = x0;
         int y = y0;
-        final int cellSize = 20;
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.blue);
         g2d.setStroke(new BasicStroke(2));

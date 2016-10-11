@@ -1,5 +1,10 @@
 package org.sbx.ui;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.sbx.objects.Maze;
+import org.sbx.objects.Player;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,6 +14,9 @@ import java.awt.event.KeyListener;
  */
 public class VisualPlayer extends AbstractVisual {
 
+    private static final Logger logger = LogManager.getLogger(VisualPlayer.class);
+
+    private Player player = new Player();
     public JButton p = new JButton();
 
     public void setCoords(int x, int y){
@@ -17,28 +25,28 @@ public class VisualPlayer extends AbstractVisual {
     }
 
     public void init(){
+        player.setCurrentRoomId(0);
+        setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
+        logger.error(width);
+        logger.error(height);
         p.setBounds(x, y, width, height);
         p.addKeyListener(new Move());
     }
 
     public void moveUp(){
-        p.setBounds(x, y-=height, width, height);
-        p.repaint();
+        player.moveUp();
     }
 
     public void moveDown(){
-        p.setBounds(x, y+=height, width, height);
-        p.repaint();
+        player.moveDown();
     }
 
     public void moveLeft(){
-        p.setBounds(x-=width, y, width, height);
-        p.repaint();
+        player.moveLeft();
     }
 
     public void moveRight(){
-        p.setBounds(x+=width, y, width, height);
-        p.repaint();
+        player.moveRight();
     }
 
     private class Move implements KeyListener {
@@ -51,15 +59,31 @@ public class VisualPlayer extends AbstractVisual {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W: case KeyEvent.VK_UP:
                     moveUp();
+                    setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
+                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
+                    p.setBounds(x, y, width, height);
+                    p.repaint();
                     break;
                 case KeyEvent.VK_S: case KeyEvent.VK_DOWN:
                     moveDown();
+                    setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
+                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
+                    p.setBounds(x, y, width, height);
+                    p.repaint();
                     break;
                 case KeyEvent.VK_A:case KeyEvent.VK_LEFT:
                     moveLeft();
+                    setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
+                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
+                    p.setBounds(x, y, width, height);
+                    p.repaint();
                     break;
                 case KeyEvent.VK_D:case KeyEvent.VK_RIGHT:
                     moveRight();
+                    setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
+                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
+                    p.setBounds(x, y, width, height);
+                    p.repaint();
                     break;
             }
         }
