@@ -1,15 +1,10 @@
 package org.sbx.main;
 
 import org.sbx.directors.MazeDirector;
-import org.sbx.objects.Direction;
 import org.sbx.objects.Maze;
-import org.sbx.objects.Room;
-import org.sbx.service.Classes;
-import org.sbx.service.RandomSiteGenerator;
 import org.sbx.ui.Paint;
 
 import javax.swing.*;
-import java.util.HashMap;
 
 /**
  * Created by aloginov on 01.10.16.

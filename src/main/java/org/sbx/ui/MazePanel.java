@@ -21,6 +21,10 @@ public class MazePanel extends JPanel {
 
     private Maze maze;
 
+    public MazePanel(){
+        setLayout(null);
+    }
+
     public void setMaze(Maze maze){
         this.maze = maze;
     }
