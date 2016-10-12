@@ -60,10 +60,6 @@ public class Maze implements Buildable{
 
     public static int getNeighbourId(Direction direction) throws GameplayException{
 
-        String str = "Size: " + size;
-        logger.error(str);
-        str = "Rooms size: " + rooms.size();
-        logger.error(str);
         int nId = -1;
         switch (direction){
             case NORTH:
@@ -91,7 +87,6 @@ public class Maze implements Buildable{
                     throw new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
                 break;
         }
-        logger.error(nId);
         return nId;
     }
 

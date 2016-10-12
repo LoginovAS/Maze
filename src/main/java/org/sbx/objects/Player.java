@@ -19,13 +19,10 @@ public class Player {
 
     private void move(Direction direction)  throws GameplayException{
         Site site = Maze.getRooms().get(currentRoomId).getSites().get(direction);
-        logger.error(site.getClass().toString());
         if (site.getClass().toString().contains(Classes.CLASS_DOOR))
             try {
                 this.currentRoomId = Maze.getNeighbourId(direction);
                 Maze.setCurrentRoom(this.currentRoomId);
-                logger.error(this.currentRoomId);
-                logger.error(Maze.getNeighbourId(direction));
             } catch (GameplayException ge){
                 logger.error(ge.getErrorMessage(), ge.getErrorCode());
             }
