@@ -17,7 +17,6 @@ public class MazeWindow extends JFrame {
         super("Maze window");
 
         MazePanel mazePanel = new MazePanel();
-        //VisualPanel mazePanel = new VisualPanel();
         mazePanel.setMaze(maze);
         mazePanel.initPlayer();
         getContentPane().add(mazePanel);

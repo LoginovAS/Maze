@@ -33,8 +33,8 @@ public class Maze implements Buildable{
         this.size = size;
     }
 
-    public void setCurrentRoom(int roomId){
-        this.currentRoom = roomId;
+    public static void setCurrentRoom(int roomId){
+        currentRoom = roomId;
     }
 
     public void addRoom(Room room){
@@ -60,8 +60,6 @@ public class Maze implements Buildable{
 
     public static int getNeighbourId(Direction direction) throws GameplayException{
 
-        logger.error(direction.toString());
-        logger.error(currentRoom);
         String str = "Size: " + size;
         logger.error(str);
         str = "Rooms size: " + rooms.size();
@@ -75,13 +73,13 @@ public class Maze implements Buildable{
                     throw new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
                 break;
             case EAST:
-                if ((currentRoom + 1) % size < size - 1)
+                if (currentRoom  % size < size - 1)
                     nId = currentRoom + 1;
                 else
                     throw  new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);
                 break;
             case SOUTH:
-                if (currentRoom <= rooms.size() - size)
+                if (currentRoom < rooms.size() - size)
                     nId = currentRoom + size;
                 else
                     throw  new GameplayException(Errors.DIRECTION_NEIGHBOURHOOD_ERROR);

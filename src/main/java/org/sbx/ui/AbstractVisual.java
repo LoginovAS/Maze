@@ -10,10 +10,16 @@ public abstract class AbstractVisual {
     protected int y;
     protected int width;
     protected int height;
+    protected int cellsCountX;
+    protected int cellsCountY;
+    protected int cellSize;
 
-    public void setDimension(int width, int height){
+    public void setDimension(int width, int height, int cellsCountX, int cellsCountY, int cellSize){
         this.width = width;
         this.height = height;
+        this.cellsCountX = cellsCountX;
+        this.cellsCountY = cellsCountY;
+        this.cellSize = cellSize;
     }
 
     protected int getX0(){
@@ -25,12 +31,12 @@ public abstract class AbstractVisual {
     }
 
     protected int getVisualXById(int id){
-        x = id % width;
-        return x0 + (width * x);
+        x = id % cellsCountX;
+        return x0 + (cellSize * x);
     }
 
     protected int getVisualYById(int id){
-        y = id / height;
-        return y0 + (height * y);
+        y = id / cellsCountY;
+        return y0 + (cellSize * y);
     }
 }

@@ -56,32 +56,41 @@ public class VisualPlayer extends AbstractVisual {
         }
 
         public void keyPressed(KeyEvent e) {
+            int rid, xid, yid;
             switch (e.getKeyCode()){
                 case KeyEvent.VK_W: case KeyEvent.VK_UP:
                     moveUp();
+                    rid = player.getCurrentRoomId();
+                    xid = getVisualXById(rid);
+                    yid = getVisualYById(rid);
                     setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
-                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
                     p.setBounds(x, y, width, height);
                     p.repaint();
                     break;
                 case KeyEvent.VK_S: case KeyEvent.VK_DOWN:
                     moveDown();
+                    rid = player.getCurrentRoomId();
+                    xid = getVisualXById(rid);
+                    yid = getVisualYById(rid);
                     setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
-                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
                     p.setBounds(x, y, width, height);
                     p.repaint();
                     break;
                 case KeyEvent.VK_A:case KeyEvent.VK_LEFT:
                     moveLeft();
+                    rid = player.getCurrentRoomId();
+                    xid = getVisualXById(rid);
+                    yid = getVisualYById(rid);
                     setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
-                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
                     p.setBounds(x, y, width, height);
                     p.repaint();
                     break;
                 case KeyEvent.VK_D:case KeyEvent.VK_RIGHT:
                     moveRight();
+                    rid = player.getCurrentRoomId();
+                    xid = getVisualXById(rid);
+                    yid = getVisualYById(rid);
                     setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
-                    System.out.printf("Current room: %d\nX: %d\nY: %d", player.getCurrentRoomId(), x, y);
                     p.setBounds(x, y, width, height);
                     p.repaint();
                     break;
