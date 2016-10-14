@@ -2,6 +2,7 @@ package org.sbx.main;
 
 import org.sbx.directors.MazeDirector;
 import org.sbx.objects.Maze;
+import org.sbx.objects.MazeGenerator;
 import org.sbx.ui.Paint;
 
 import javax.swing.*;
@@ -12,12 +13,7 @@ import javax.swing.*;
 public class Application {
     public static void main(String[] args){
 
-        MazeDirector mazeDirector = new MazeDirector();
-        mazeDirector.setBuilder();
-
-        mazeDirector.desc(10);
-        mazeDirector.construct();
-        final Maze maze = mazeDirector.build();
+        final Maze maze = MazeGenerator.generateNewMaze(3);
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new Paint(maze);

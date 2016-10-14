@@ -9,4 +9,6 @@ public class Classes {
 
     public static final String CLASS_WALL = "org.sbx.objects.Wall";
 
+    public static final String CLASS_FINISH_ROOM = "org.sbx.objects.FinishRoom";
+
 }

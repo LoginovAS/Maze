@@ -8,6 +8,7 @@ import org.sbx.exceptions.GameplayException;
 import org.sbx.exceptions.Errors;
 import org.sbx.interfaces.Builder;
 import org.sbx.objects.Direction;
+import org.sbx.objects.FinishRoom;
 import org.sbx.objects.Maze;
 import org.sbx.objects.Room;
 
@@ -149,6 +150,19 @@ public class StandardMazeBuilder extends MazeBuilder implements Builder {
         return neighbours;
     }
 
+    private void addingFinishRoom(int roomId, FinishRoom room){
+        currentMaze.changeRoom(roomId, room);
+    }
+
+    public void addFinish(){
+        Random random = new Random(System.currentTimeMillis());
+        int s = Maze.getRooms().size();
+        Room room = Maze.getRooms().get(s - 1);
+        FinishRoomBuilder finishRoomBuilder = new FinishRoomBuilder();
+        finishRoomBuilder.setRoom(room);
+        finishRoomBuilder.construct();
+        addingFinishRoom(s - 1, (FinishRoom) finishRoomBuilder.build());
+    }
 
     public int getRoomId(Room room){
         return Maze.getRooms().indexOf(room);

@@ -23,6 +23,7 @@ public class Maze implements Buildable{
 
     public Maze(){
         rooms = new ArrayList<Room>();
+        currentRoom = 0;
     }
 
     public Maze(int size){
@@ -54,7 +55,7 @@ public class Maze implements Buildable{
         this.rooms.set(roomId, room);
     }
 
-    public int getSize(){
+    public static int getSize(){
         return  size;
     }
 
