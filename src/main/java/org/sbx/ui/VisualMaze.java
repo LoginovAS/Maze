@@ -9,6 +9,7 @@ import org.sbx.service.Classes;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -78,7 +79,13 @@ public class VisualMaze implements Buildable{
                         break;
                 }
             }
+            if (room.getClass().toString().contains(Classes.CLASS_FINISH_ROOM)){
+                Rectangle2D rectangle2D = new Rectangle2D.Double(x, y, cellSize, cellSize);
+                graphics2D.setColor(Color.YELLOW);
+                graphics2D.fill(rectangle2D);
+                graphics2D.draw(rectangle2D);
 
+            }
             visualMazeArray.add(visualRoomsArray);
             x += cellSize;
             counter++;
@@ -86,6 +93,7 @@ public class VisualMaze implements Buildable{
     }
 
     public void draw(){
+        graphics2D.setColor(Color.BLUE);
         for (ArrayList<Line2D> rooms: visualMazeArray)
             for (Line2D line: rooms)
                 graphics2D.draw(line);

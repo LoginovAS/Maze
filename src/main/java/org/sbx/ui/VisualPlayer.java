@@ -25,6 +25,7 @@ public class VisualPlayer extends AbstractVisual {
     }
 
     public void init(){
+        player.addObserver(new PlayerObserver());
         player.setCurrentRoomId(0);
         setCoords(getVisualXById(player.getCurrentRoomId()), getVisualYById(player.getCurrentRoomId()));
         p.setBounds(x, y, width, height);

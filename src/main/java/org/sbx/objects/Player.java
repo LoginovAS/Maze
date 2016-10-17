@@ -8,11 +8,12 @@ import org.sbx.exceptions.GameplayException;
 import org.sbx.service.Classes;
 
 import javax.swing.*;
+import java.util.Observable;
 
 /**
  * Created by aloginov on 10.10.16.
  */
-public class Player {
+public class Player extends Observable{
 
     private static final Logger logger = LogManager.getLogger(Player.class);
     private int currentRoomId;
@@ -22,24 +23,28 @@ public class Player {
         if (site.getClass().toString().contains(Classes.CLASS_DOOR))
             try {
                 this.currentRoomId = Maze.getNeighbourId(direction);
+                setChanged();
+                notifyObservers();
                 Maze.setCurrentRoom(this.currentRoomId);
             } catch (GameplayException ge){
                 logger.error(ge.getErrorMessage(), ge.getErrorCode());
             }
-        else if (site.getClass().toString() == Classes.CLASS_WALL)
+        else if (site.getClass().toString().contains(Classes.CLASS_WALL))
             throw new GameplayException(Errors.DIRECTION_WALL_ERROR);
 
     }
 
     public void setCurrentRoomId(int roomId){
         this.currentRoomId = roomId;
+        setChanged();
+        notifyObservers();
     }
 
     public void moveUp(){
         try {
             move(Direction.NORTH);
         } catch (GameplayException ex){
-            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.warn(ex.getErrorMessage(), ex.getErrorCode());
         }
     }
 
@@ -47,7 +52,7 @@ public class Player {
         try {
             move(Direction.SOUTH);
         } catch (GameplayException ex){
-            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.warn(ex.getErrorMessage(), ex.getErrorCode());
         }
     }
 
@@ -55,7 +60,7 @@ public class Player {
         try {
             move(Direction.EAST);
         } catch (GameplayException ex){
-            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.warn(ex.getErrorMessage(), ex.getErrorCode());
         }
     }
 
@@ -63,7 +68,7 @@ public class Player {
         try {
             move(Direction.WEST);
         } catch (GameplayException ex){
-            logger.error(ex.getErrorMessage(), ex.getErrorCode());
+            logger.warn(ex.getErrorMessage(), ex.getErrorCode());
         }
     }
 

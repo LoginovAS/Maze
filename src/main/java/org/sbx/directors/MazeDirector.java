@@ -37,6 +37,8 @@ public class MazeDirector implements Director {
         mazeBuilder.setMazeSize(mazeSize);
         mazeBuilder.buildMazeFrame();
         mazeBuilder.createDoors();
+        mazeBuilder.addFinish();
+
     }
 
     public int getIdByRoom(Room room){
